@@ -29,13 +29,31 @@
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; font-weight: 300; }
         .cinzel { font-family: 'Cinzel', serif; letter-spacing: 5px; }
 
-        /* --- INTRO SHUTTER --- */
+        /* --- LUXURY INTRO SHUTTER --- */
         #intro-shutter {
             position: fixed; inset: 0; background: var(--deep-black); z-index: 10000;
-            display: flex; align-items: center; justify-content: center;
-            transition: transform 1.5s cubic-bezier(0.9, 0, 0.1, 1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
         }
-        .shutter-text h1 { font-size: 1.5rem; letter-spacing: 15px; color: var(--gold); text-transform: uppercase; }
+        .shutter-content { text-align: center; }
+        .shutter-text h1 { 
+            font-size: 1.2rem; letter-spacing: 12px; color: var(--gold); 
+            text-transform: uppercase; margin-bottom: 20px;
+            animation: fadeInLetter 1.5s ease forwards;
+        }
+        .shutter-line {
+            width: 0; height: 1px; background: var(--gold);
+            margin: 0 auto; animation: lineGrow 1.2s ease forwards;
+        }
+        .shutter-tagline {
+            margin-top: 15px; font-size: 0.6rem; letter-spacing: 6px;
+            color: rgba(179, 139, 89, 0.5); text-transform: uppercase;
+            opacity: 0; animation: fadeIn 1s ease 0.8s forwards;
+        }
+
+        @keyframes lineGrow { to { width: 150px; } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes fadeInLetter { from { letter-spacing: 25px; opacity: 0; } to { letter-spacing: 12px; opacity: 1; } }
 
         /* --- NAVIGATION --- */
         nav {
@@ -43,135 +61,119 @@
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; transition: 0.6s ease;
         }
-        nav.scrolled { padding: 18px 6%; background: rgba(0,0,0,0.98); border-bottom: 1px solid rgba(179, 139, 89, 0.1); }
+        nav.scrolled { padding: 18px 6%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); }
         .nav-logo { display: flex; align-items: center; gap: 15px; }
-        .nav-logo img { height: 50px; width: auto; }
-        .nav-logo span { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); letter-spacing: 3px; font-weight: 700; }
-        .nav-links a { color: var(--ivory); text-decoration: none; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; margin-left: 35px; opacity: 0.7; transition: 0.3s; }
+        .nav-logo img { height: 45px; filter: grayscale(1) brightness(1.5); }
+        .nav-logo span { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--gold); letter-spacing: 3px; font-weight: 700; }
+        .nav-links a { color: var(--ivory); text-decoration: none; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; margin-left: 35px; opacity: 0.6; transition: 0.3s; }
         .nav-links a:hover { opacity: 1; color: var(--gold); }
 
         /* --- HERO SECTION --- */
         .hero { 
             height: 100vh; width: 100%; position: relative; 
-            display: flex; align-items: center; justify-content: center; 
+            display: flex; align-items: flex-end; justify-content: center; 
             overflow: hidden; text-align: center; background: #000;
+            padding-bottom: 8vh; 
         }
         .hero-bg-container { position: absolute; inset: 0; z-index: 0; }
         .hero-slide {
             position: absolute; inset: 0; background-size: cover; background-position: center;
             opacity: 0; transition: opacity 2s ease-in-out; 
         }
-        .hero-slide.active { opacity: 1; transform: scale(1.05); animation: slowZoom 10s infinite alternate; }
+        .hero-slide.active { opacity: 1; animation: slowZoom 15s infinite alternate; }
         
         @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
 
         .hero-overlay { 
             position: absolute; inset: 0; z-index: 1; 
-            background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%); 
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.4) 100%); 
         }
 
-        .hero-content { 
-            position: relative; 
-            z-index: 2; 
-            padding: 0 20px; 
-            max-width: 1000px; 
-            margin-top: 80px; /* Pushed text lower */
-        }
+        .hero-content { position: relative; z-index: 2; padding: 0 20px; max-width: 900px; }
         .hero-content h1 { 
-            font-size: clamp(2.2rem, 6vw, 4.5rem); 
-            color: var(--gold); 
-            margin-bottom: 40px; font-weight: 200; letter-spacing: 2px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-size: clamp(1.8rem, 5vw, 3.5rem); 
+            color: var(--white); 
+            margin-bottom: 30px; font-weight: 200; letter-spacing: 1px;
+            line-height: 1.2;
         }
+        .hero-content h1 span { color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic; }
         
         .btn-reserve {
             display: inline-block;
-            padding: 18px 55px; border: 1px solid var(--gold); color: var(--ivory); 
-            text-decoration: none; font-size: 0.7rem; letter-spacing: 4px; 
-            text-transform: uppercase; transition: 0.5s; background: rgba(0,0,0,0.4);
-            margin-bottom: 40px;
+            padding: 16px 45px; border: 1px solid var(--gold); color: var(--ivory); 
+            text-decoration: none; font-size: 0.65rem; letter-spacing: 4px; 
+            text-transform: uppercase; transition: 0.5s; background: transparent;
+            margin-bottom: 30px;
         }
-        .btn-reserve:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 40px rgba(179, 139, 89, 0.3); }
+        .btn-reserve:hover { background: var(--gold); color: var(--black); box-shadow: 0 10px 30px rgba(179, 139, 89, 0.2); }
 
         .hero-location-detail {
-            margin-top: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            color: var(--gold);
-            font-size: 0.7rem;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            opacity: 0.8;
+            display: flex; align-items: center; justify-content: center;
+            gap: 15px; color: var(--gold); font-size: 0.6rem;
+            letter-spacing: 6px; text-transform: uppercase; opacity: 0.6;
         }
-        .dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
+        .dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
 
         /* --- OWNER SECTION --- */
-        .owner-section { padding: 120px 10%; background: var(--deep-black); }
-        .owner-flex { display: flex; align-items: center; justify-content: center; gap: 70px; max-width: 1100px; margin: 0 auto; }
-        .owner-img-box { flex: 0 0 260px; }
-        .owner-img-box img { width: 100%; height: 360px; object-fit: cover; border: 1px solid var(--gold); padding: 8px; }
+        .owner-section { padding: 140px 10%; background: var(--deep-black); }
+        .owner-flex { display: flex; align-items: center; justify-content: center; gap: 80px; max-width: 1100px; margin: 0 auto; }
+        .owner-img-box { flex: 0 0 280px; position: relative; }
+        .owner-img-box::after { content: ''; position: absolute; inset: -15px; border: 1px solid rgba(179, 139, 89, 0.1); z-index: -1; }
+        .owner-img-box img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(0.2); border: 1px solid rgba(179, 139, 89, 0.3); padding: 5px; }
         .owner-info { flex: 1.5; }
-        .owner-info h4 { color: var(--gold); letter-spacing: 5px; font-size: 0.75rem; margin-bottom: 15px; }
-        .owner-info h2 { font-size: 2.5rem; margin-bottom: 25px; color: var(--ivory); font-weight: 300; }
-        .owner-info p { color: #888; font-size: 1rem; font-weight: 200; margin-bottom: 25px; }
-        .signature { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--gold); }
+        .owner-info h4 { color: var(--gold); letter-spacing: 4px; font-size: 0.7rem; margin-bottom: 20px; }
+        .owner-info h2 { font-size: 2.8rem; margin-bottom: 30px; color: var(--ivory); font-weight: 300; }
+        .owner-info p { color: #888; font-size: 0.95rem; font-weight: 300; margin-bottom: 25px; line-height: 1.8; }
+        .signature { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; color: var(--gold); margin-top: 20px; }
 
-        /* --- SERVICES --- */
-        .services { padding: 100px 8%; background: var(--black); }
-        .sec-title { text-align: center; margin-bottom: 80px; }
-        .sec-title h2 { font-size: 2.8rem; color: var(--ivory); font-weight: 300; }
-        .sec-title div { width: 40px; height: 1px; background: var(--gold); margin: 30px auto; }
+        /* --- SERVICES (FULL 10 RESTORED) --- */
+        .services { padding: 120px 8%; background: var(--black); }
+        .sec-title { text-align: center; margin-bottom: 100px; }
+        .sec-title h2 { font-size: 2.5rem; color: var(--ivory); letter-spacing: 2px; }
+        .sec-title div { width: 30px; height: 1px; background: var(--gold); margin: 25px auto; }
 
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .service-card { background: #0a0a0a; padding: 60px 35px; text-align: center; border: 1px solid #151515; transition: 0.4s; }
+        .service-card { background: #080808; padding: 60px 35px; text-align: center; border: 1px solid #111; transition: 0.5s; }
         .service-card:hover { border-color: var(--gold); transform: translateY(-10px); }
-        .service-card i { font-size: 2rem; color: var(--gold); margin-bottom: 30px; opacity: 0.7; }
-        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--ivory); font-weight: 300; }
-        .service-card p { color: #666; font-size: 0.85rem; margin-bottom: 20px; }
+        .service-card i { font-size: 1.8rem; color: var(--gold); margin-bottom: 30px; opacity: 0.7; }
+        .service-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--ivory); font-weight: 300; }
+        .service-card p { color: #555; font-size: 0.85rem; margin-bottom: 25px; }
         .wa-inquire { color: var(--gold); text-decoration: none; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid transparent; padding-bottom: 5px; transition: 0.3s; }
         .wa-inquire:hover { border-bottom: 1px solid var(--gold); }
 
         /* --- GALLERY --- */
         .gallery { padding: 100px 2%; background: var(--deep-black); }
-        .masonry { column-count: 5; column-gap: 12px; }
-        .m-item { break-inside: avoid; margin-bottom: 12px; overflow: hidden; }
-        .m-item img { width: 100%; display: block; transition: 0.6s ease; }
-        .m-item:hover img { transform: scale(1.08); }
-
-        /* --- REVIEWS --- */
-        .reviews { padding: 100px 10%; background: var(--black); }
-        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .review-card { background: #0a0a0a; padding: 50px; border-left: 2px solid var(--gold); }
-        .stars { color: var(--gold); margin-bottom: 20px; font-size: 0.8rem; }
-        .review-card p { font-style: italic; color: #bbb; margin-bottom: 30px; font-size: 0.95rem; font-weight: 200; }
-        .author { font-family: 'Cinzel'; font-size: 0.7rem; color: var(--gold); letter-spacing: 3px; }
+        .masonry { column-count: 5; column-gap: 15px; }
+        .m-item { break-inside: avoid; margin-bottom: 15px; overflow: hidden; background: #000; }
+        .m-item img { width: 100%; display: block; transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); opacity: 0.8; }
+        .m-item:hover img { transform: scale(1.05); opacity: 1; }
 
         /* --- FOOTER --- */
-        footer { background: #000; padding: 100px 10% 50px; border-top: 1px solid rgba(179, 139, 89, 0.05); }
+        footer { background: #000; padding: 120px 10% 60px; border-top: 1px solid #111; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 80px; }
-        .f-logo-box { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
-        .f-logo-box img { height: 45px; }
-        .f-col h3 { color: var(--gold); font-family: 'Cinzel'; margin-bottom: 30px; font-size: 0.9rem; letter-spacing: 3px; }
-        .f-col p, .f-col a { color: #555; font-size: 0.85rem; text-decoration: none; display: block; margin-bottom: 12px; }
-        .f-col a:hover { color: var(--gold); }
-        .socials { margin-top: 30px; }
-        .socials a { color: var(--white); font-size: 1.4rem; margin-right: 30px; opacity: 0.4; transition: 0.3s; }
-        .socials a:hover { opacity: 1; color: var(--gold); }
+        .f-col h3 { color: var(--gold); font-family: 'Cinzel'; margin-bottom: 35px; font-size: 0.8rem; letter-spacing: 4px; }
+        .f-col p, .f-col a { color: #444; font-size: 0.8rem; text-decoration: none; display: block; margin-bottom: 15px; letter-spacing: 1px; }
+        .socials { margin-top: 40px; }
+        .socials a { display: inline-block; color: var(--gold); font-size: 1.2rem; margin-right: 30px; opacity: 0.5; transition: 0.3s; }
+        .socials a:hover { opacity: 1; transform: translateY(-3px); }
 
-        .wa-float { position: fixed; bottom: 35px; right: 35px; background: #25D366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 5000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .wa-float { position: fixed; bottom: 40px; right: 40px; background: #25D366; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 5000; transition: 0.3s; }
+        .wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3); }
 
         @media (max-width: 1200px) { .masonry { column-count: 3; } }
-        @media (max-width: 900px) { .nav-links { display: none; } .owner-flex { flex-direction: column; text-align: center; } .footer-grid { grid-template-columns: 1fr; text-align: center; } .f-logo-box { justify-content: center; } .masonry { column-count: 2; } }
+        @media (max-width: 900px) { .nav-links { display: none; } .owner-flex { flex-direction: column; text-align: center; } .footer-grid { grid-template-columns: 1fr; gap: 60px; text-align: center; } .masonry { column-count: 2; } }
     </style>
 </head>
 <body>
 
-    <!-- Shutter Intro -->
+    <!-- Luxury Shutter Intro -->
     <div id="intro-shutter">
-        <div class="shutter-text">
-            <h1>PRATYUSH EVENTS</h1>
+        <div class="shutter-content">
+            <div class="shutter-text">
+                <h1>Pratyush Events</h1>
+            </div>
+            <div class="shutter-line"></div>
+            <div class="shutter-tagline">Bespoke Excellence</div>
         </div>
     </div>
 
@@ -179,37 +181,32 @@
     <nav id="navbar">
         <div class="nav-logo">
             <img src="https://lh3.googleusercontent.com/d/11ZwLiMqMrvz_Emytnyds3dRZlu681XDn" alt="Logo">
-            <span>PRATYUSH EVENTS</span>
+            <span>PRATYUSH</span>
         </div>
         <div class="nav-links">
-            <a href="#about">Vision</a>
+            <a href="#about">The Vision</a>
             <a href="#services">Services</a>
             <a href="#gallery">Portfolio</a>
-            <a href="#contact">Contact</a>
+            <a href="#contact">Inquire</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-bg-container">
-            <div class="hero-slide active" 
-                style="background-image: url('https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&w=2070&q=80')">
-            </div>
-            <div class="hero-slide" 
-                style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=2070&q=80')">
-            </div>
-            <div class="hero-slide" 
-                style="background-image: url('https://images.unsplash.com/photo-1513273159397-6030ef62b29c?auto=format&fit=crop&w=2070&q=80')">
-            </div>
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=2070')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1513273159397-6030ef62b29c?q=80&w=2070')"></div>
         </div>
         <div class="hero-overlay"></div>
+        
         <div class="hero-content">
-            <h1 data-aos="fade-up">Curating Moments<br>Beyond Imagination</h1>
-            <a href="https://wa.me/919608837805" class="btn-reserve" data-aos="fade-up" data-aos-delay="200">Reserve Your Date</a>
-            <div class="hero-location-detail" data-aos="fade-up" data-aos-delay="400">
+            <h1 data-aos="fade-up" data-aos-delay="200">Crafting <span>Extraordinary</span><br>Milestones & Legacies</h1>
+            <a href="https://wa.me/919608837805" class="btn-reserve" data-aos="fade-up" data-aos-delay="400">Reserve Your Date</a>
+            <div class="hero-location-detail" data-aos="fade-up" data-aos-delay="600">
                 <span>Kishanganj</span>
                 <div class="dot"></div>
-                <span>Bihar</span>
+                <span>Est. 2023</span>
             </div>
         </div>
     </section>
@@ -218,19 +215,19 @@
     <section class="owner-section" id="about">
         <div class="owner-flex">
             <div class="owner-img-box" data-aos="fade-right">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600" alt="Abhishek Pratyush CEO">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600" alt="CEO">
             </div>
             <div class="owner-info" data-aos="fade-left">
-                <h4>FOUNDER & CEO</h4>
+                <h4>THE FOUNDER</h4>
                 <h2>Abhishek Pratyush</h2>
-                <p>Welcome to Pratyush Event Planner, where dreams meet meticulous planning and flawless execution. We specialize in curating extraordinary experiences that transcend the ordinary.</p>
-                <p>Based in Kishanganj, our team brings creativity and royal perfection to every milestone. From weddings to corporate galas, we handle every detail with elite craftsmanship.</p>
+                <p>Welcome to a world where luxury is a standard, not an option. Pratyush Events was born from a passion for cinematic aesthetics and the pursuit of flawless execution.</p>
+                <p>Based in the heart of Kishanganj, we specialize in transforming grand visions into tangible masterpieces. From royal weddings to corporate galas, we curate every detail with precision and soul.</p>
                 <div class="signature">Abhishek Pratyush</div>
             </div>
         </div>
     </section>
 
-    <!-- Services -->
+    <!-- Services (10 RESTORED WITH CUSTOM WHATSAPP) -->
     <section class="services" id="services">
         <div class="sec-title" data-aos="fade-up">
             <h2>Elite Craftsmanship</h2>
@@ -243,13 +240,13 @@
                 <p>Royal ceremonies with cinematic decors.</p>
                 <a href="https://wa.me/919608837805?text=I%20want%20to%20inquire%20about%20Wedding%20Planning." class="wa-inquire">Inquire for Details</a>
             </div>
-            <div class="service-card" data-aos="fade-up">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                 <i class="fas fa-glass-cheers"></i>
                 <h3>Social Galas</h3>
                 <p>Elite private gatherings.</p>
                 <a href="https://wa.me/919608837805?text=I%20want%20to%20inquire%20about%20Social%20Events." class="wa-inquire">Inquire for Details</a>
             </div>
-            <div class="service-card" data-aos="fade-up">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fas fa-birthday-cake"></i>
                 <h3>Birthdays</h3>
                 <p>Creative themed celebrations.</p>
@@ -300,14 +297,13 @@
         </div>
     </section>
 
-    <!-- Gallery Section (Added 10 more images) -->
+    <!-- Gallery Section (Expanded) -->
     <section class="gallery" id="gallery">
         <div class="sec-title" data-aos="fade-up">
-            <h2>The Colourful Portfolio</h2>
+            <h2>The Portfolio</h2>
             <div></div>
         </div>
         <div class="masonry">
-            <!-- Original 25 -->
             <div class="m-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=500"></div>
@@ -333,8 +329,6 @@
             <div class="m-item"><img src="https://images.unsplash.com/photo-1509927083803-4bd519298ac4?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1513274815586-419020d91d1e?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1465495910484-c4b24d77bbd6?w=500"></div>
-            
-            <!-- 10 New Images -->
             <div class="m-item"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500"></div>
@@ -348,40 +342,12 @@
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section class="reviews">
-        <div class="sec-title" data-aos="fade-up">
-            <h2>Elite Client Feedback</h2>
-            <div></div>
-        </div>
-        <div class="review-grid">
-            <div class="review-card" data-aos="fade-up">
-                <div class="stars">★★★★★</div>
-                <p>"A royal experience in Kishanganj. Flawless execution from start to finish. The decor was breathtaking."</p>
-                <div class="author">— ARJUN MALHOTRA</div>
-            </div>
-            <div class="review-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="stars">★★★★★</div>
-                <p>"The team is very professional. Our destination wedding felt like a dream come true. Highly recommended."</p>
-                <div class="author">— SNEHA KAPOOR</div>
-            </div>
-            <div class="review-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="stars">★★★★★</div>
-                <p>"Best luxury event planners in Bihar. Their attention to detail and creative vision is unmatched."</p>
-                <div class="author">— RAJESH VERMA</div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer id="contact">
         <div class="footer-grid">
             <div class="f-col">
-                <div class="f-logo-box">
-                    <img src="https://lh3.googleusercontent.com/d/11ZwLiMqMrvz_Emytnyds3dRZlu681XDn" alt="Logo">
-                    <span style="color:var(--gold); font-family:'Cinzel';">PRATYUSH</span>
-                </div>
-                <p>Establishing the gold standard in bespoke events. Every milestone is a masterpiece.</p>
+                <h3>PRATYUSH</h3>
+                <p>Establishing the gold standard in bespoke event management. Every milestone is a masterpiece.</p>
                 <div class="socials">
                     <a href="https://www.instagram.com/pratyush.events"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.facebook.com/profile.php?id=100090375394338"><i class="fab fa-facebook"></i></a>
@@ -391,7 +357,6 @@
             <div class="f-col">
                 <h3>CONTACT</h3>
                 <a href="tel:9608837805">+91 96088 37805</a>
-                <a href="tel:9508930940">+91 95089 30940</a>
                 <a href="mailto:pratyusheventplanner@gmail.com">pratyusheventplanner@gmail.com</a>
             </div>
             <div class="f-col">
@@ -399,25 +364,27 @@
                 <p>Ward NO-24, Near Panitanki Ruidhasa,<br>Kishanganj, Bihar - 855107</p>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 50px; opacity: 0.1;">
-            <p style="font-size: 0.6rem; letter-spacing: 2px;">© 2026 PRATYUSH EVENT PLANNER | ESTD KISHANGANJ</p>
+        <div style="text-align: center; margin-top: 80px; opacity: 0.2;">
+            <p style="font-size: 0.5rem; letter-spacing: 3px;">© 2026 PRATYUSH EVENTS | ALL RIGHTS RESERVED</p>
         </div>
     </footer>
 
     <!-- WhatsApp -->
     <a href="https://wa.me/919608837805" class="wa-float" target="_blank">
-        <i class="fab fa-whatsapp" style="color: white; font-size: 2.2rem;"></i>
+        <i class="fab fa-whatsapp" style="color: white; font-size: 2rem;"></i>
     </a>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         AOS.init({ duration: 1200, once: true });
+        
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('intro-shutter').style.transform = 'translateY(-100%)'; }, 1000);
+            setTimeout(() => { 
+                document.getElementById('intro-shutter').style.transform = 'translateY(-100%)'; 
+            }, 2200);
         });
 
-        // Hero Auto Slider
         let cur = 0;
         const slides = document.querySelectorAll('.hero-slide');
         setInterval(() => {
