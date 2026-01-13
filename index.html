@@ -15,7 +15,7 @@
 
     <style>
         :root {
-            --gold: #B38B59; /* Matte Antique Gold */
+            --gold: #B38B59; 
             --black: #050505;
             --deep-black: #000000;
             --white: #ffffff;
@@ -67,18 +67,25 @@
 
         .hero-overlay { 
             position: absolute; inset: 0; z-index: 1; 
-            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%); 
+            background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%); 
         }
 
-        .hero-content { position: relative; z-index: 2; padding: 0 20px; max-width: 1000px; }
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            padding: 0 20px; 
+            max-width: 1000px; 
+            margin-top: 80px; /* Pushed text lower */
+        }
         .hero-content h1 { 
             font-size: clamp(2.2rem, 6vw, 4.5rem); 
-            color: var(--gold); /* Headline now Gold */
+            color: var(--gold); 
             margin-bottom: 40px; font-weight: 200; letter-spacing: 2px;
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         .btn-reserve {
+            display: inline-block;
             padding: 18px 55px; border: 1px solid var(--gold); color: var(--ivory); 
             text-decoration: none; font-size: 0.7rem; letter-spacing: 4px; 
             text-transform: uppercase; transition: 0.5s; background: rgba(0,0,0,0.4);
@@ -126,14 +133,14 @@
         .wa-inquire { color: var(--gold); text-decoration: none; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid transparent; padding-bottom: 5px; transition: 0.3s; }
         .wa-inquire:hover { border-bottom: 1px solid var(--gold); }
 
-        /* --- GALLERY (COLOURFUL) --- */
+        /* --- GALLERY --- */
         .gallery { padding: 100px 2%; background: var(--deep-black); }
         .masonry { column-count: 5; column-gap: 12px; }
         .m-item { break-inside: avoid; margin-bottom: 12px; overflow: hidden; }
         .m-item img { width: 100%; display: block; transition: 0.6s ease; }
         .m-item:hover img { transform: scale(1.08); }
 
-        /* --- REVIEWS SECTION --- */
+        /* --- REVIEWS --- */
         .reviews { padding: 100px 10%; background: var(--black); }
         .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .review-card { background: #0a0a0a; padding: 50px; border-left: 2px solid var(--gold); }
@@ -182,21 +189,23 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Exactly 3 Slides) -->
-   <section class="hero">
-    <div class="hero-bg-container">
-        <div class="hero-slide active" 
-            style="background-image: url('https://images.unsplash.com/photos/Q0UKSokEh9E?auto=format&fit=crop&w=2070&q=80')">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-container">
+            <div class="hero-slide active" 
+                style="background-image: url('https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&w=2070&q=80')">
+            </div>
+            <div class="hero-slide" 
+                style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=2070&q=80')">
+            </div>
+            <div class="hero-slide" 
+                style="background-image: url('https://images.unsplash.com/photo-1513273159397-6030ef62b29c?auto=format&fit=crop&w=2070&q=80')">
+            </div>
         </div>
-
-        <div class="hero-slide" 
-            style="background-image: url('https://images.unsplash.com/photos/AhqcqdRjF28?auto=format&fit=crop&w=2070&q=80')">
-        </div>
-
-        <div class="hero-slide" 
-            style="background-image: url('https://images.unsplash.com/photos/Qo3fCZjaLEI?auto=format&fit=crop&w=2070&q=80')">
-        </div>
-    </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 data-aos="fade-up">Curating Moments<br>Beyond Imagination</h1>
+            <a href="https://wa.me/919608837805" class="btn-reserve" data-aos="fade-up" data-aos-delay="200">Reserve Your Date</a>
             <div class="hero-location-detail" data-aos="fade-up" data-aos-delay="400">
                 <span>Kishanganj</span>
                 <div class="dot"></div>
@@ -291,13 +300,14 @@
         </div>
     </section>
 
-    <!-- Gallery (Colourful) -->
+    <!-- Gallery Section (Added 10 more images) -->
     <section class="gallery" id="gallery">
         <div class="sec-title" data-aos="fade-up">
             <h2>The Colourful Portfolio</h2>
             <div></div>
         </div>
         <div class="masonry">
+            <!-- Original 25 -->
             <div class="m-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=500"></div>
@@ -323,6 +333,18 @@
             <div class="m-item"><img src="https://images.unsplash.com/photo-1509927083803-4bd519298ac4?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1513274815586-419020d91d1e?w=500"></div>
             <div class="m-item"><img src="https://images.unsplash.com/photo-1465495910484-c4b24d77bbd6?w=500"></div>
+            
+            <!-- 10 New Images -->
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1520111660231-275ee6062baa?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=500"></div>
+            <div class="m-item"><img src="https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?w=500"></div>
         </div>
     </section>
 
